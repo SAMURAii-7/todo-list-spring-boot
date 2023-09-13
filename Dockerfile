@@ -1,5 +1,5 @@
 # Stage 1: Build the JAR file
-FROM maven:3.8.4-openjdk-17
+FROM maven:3.8.4-openjdk-17 AS builder
 COPY . .
 RUN mvn clean package
 
@@ -7,5 +7,5 @@ RUN mvn clean package
 FROM openjdk:17
 EXPOSE 8080
 ENV JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+COPY --from=builder ${JAR_FILE} app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
