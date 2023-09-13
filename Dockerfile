@@ -8,6 +8,6 @@ RUN mvn clean package -DskipTests
 # Stage 2: Create a lightweight runtime image
 FROM openjdk:17
 EXPOSE 8080
-ENV JAR_FILE=target/your-jar-file.jar
-COPY --from=builder /app/${JAR_FILE} /app.jar
+ENV JAR_FILE=target/*.jar
+COPY /app/${JAR_FILE} /app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
