@@ -9,5 +9,5 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17
 EXPOSE 8080
 ENV JAR_FILE=target/*.jar
-COPY /app/${JAR_FILE} /app.jar
+COPY ${JAR_FILE} /app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
